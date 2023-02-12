@@ -39,6 +39,7 @@ class HuespedController extends Controller
     public function store(Request $request)
     {
         //afsdfqrew
+        //asdfasdfkhabskdbfjaksbdfjbhasjdbhfasjdhbfasfd
     }
 
     /**
