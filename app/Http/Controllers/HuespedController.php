@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Huesped;
 use App\Models\Ciudad;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class HuespedController extends Controller
 {
@@ -16,7 +17,9 @@ class HuespedController extends Controller
     public function index()
     {
         $huesped=Huesped::all();
+        //$ciudades=Ciudad::all();
         return view('huesped.index',["huesped"=>$huesped]);
+        //return view('huesped.edit',['huesped'=>$huesped,'ciudades'=>$ciudades]);
     }
 
     /**
@@ -38,10 +41,23 @@ class HuespedController extends Controller
      */
     public function store(Request $request)
     {
-        //afsdfqrew
-        //777777777777777777777777777777777777777777777777777777777777777777
-        //asdfasdfkhabskdbfjaksbdfjbhasjdbhfasjdhbfasfd
+        $request->validate([            
+            'cihuesped'     =>'required',
+            'nombrecompleto'=>'required',
+            'idciudad'      =>'required',
+            'telefono'      =>'required',
+            'profesion'     =>'required'
+        ]);
+        //dd($request->all());
+        $huesped=new Huesped();        
+        $huesped->cihuesped=$request->cihuesped;
+        $huesped->nombrecompleto=$request->nombrecompleto;
+        $huesped->idciudad=$request->idciudad;
+        $huesped->telefono=$request->telefono;
+        $huesped->profesion=$request->profesion;
+        $huesped->save();
 
+        return Redirect::to('huesped');
     }
 
     /**
@@ -61,9 +77,12 @@ class HuespedController extends Controller
      * @param  \App\Models\Huesped  $huesped
      * @return \Illuminate\Http\Response
      */
-    public function edit(Huesped $huesped)
+    public function edit($id)
     {
-        //
+        //dd($id);
+        $huesped=Huesped::findOrFail($id);
+        $ciudades=Ciudad::all();
+        return view('huesped.edit',['huesped'=>$huesped,'ciudades'=>$ciudades]);
     }
 
     /**
@@ -73,9 +92,19 @@ class HuespedController extends Controller
      * @param  \App\Models\Huesped  $huesped
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Huesped $huesped)
+    public function update(Request $request, $id)
     {
-        //
+        //dd($request->all());
+        //dd($id);
+        $huesped=Huesped::findOrFail($id);
+        $huesped->cihuesped=$request->cihuesped;
+        $huesped->nombrecompleto=$request->nombrecompleto;
+        $huesped->idciudad=$request->idciudad;
+        $huesped->telefono=$request->telefono;
+        $huesped->profesion=$request->profesion;
+        $huesped->save();
+
+        return Redirect::to('huesped');
     }
 
     /**

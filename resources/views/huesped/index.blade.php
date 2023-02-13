@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Lista Huespeds')
 
 @section('content_header')
     <h1>index huesped</h1>
@@ -23,28 +23,46 @@
             </a>
         </div>
         <hr>
-        <table class="table table-bordered" id="datatable">
-            <thead>
-                <th>ID</th>
-                <th>CI HUESPED</th>
-                <th>NOMBRE COMPLETO</th>
-                <th>ID CIUDAD</th>
-                <th>TELEFONO</th>
-                <th>PROFESION</th>
-            </thead>
-            <tbody>            
-                @foreach($huesped as $value)            
-                <tr>            
-                    <td>{{$value->id}}</td>
-                    <td>{{$value->cihuesped}}</td>
-                    <td>{{$value->nombrecompleto}}</td>
-                    <td>{{$value->idciudad}}</td>
-                    <td>{{$value->telefono}}</td>
-                    <td>{{$value->profesion}}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="table table-responsive">
+            <table class="table table-bordered" id="datatable">
+                <thead>
+                    <th>ID</th>
+                    <th>CI HUESPED</th>
+                    <th>NOMBRE COMPLETO</th>
+                    <th>ID CIUDAD</th>
+                    <th>TELEFONO</th>
+                    <th>PROFESION</th>
+                    <th>ACCIONES</th>
+                </thead>
+                <tbody>            
+                    @foreach($huesped as $value)            
+                    <tr>            
+                        <td>{{$value->id}}</td>
+                        <td>{{$value->cihuesped}}</td>
+                        <td>{{$value->nombrecompleto}}</td>
+                        <td>{{$value->idciudad}}</td>
+                        <td>{{$value->telefono}}</td>
+                        <td>{{$value->profesion}}</td>
+                        <td>
+                            <a href="{{route('huesped.edit',$value->id)}}">
+                                <button type="button" class="btn btn-outline-primary">
+                                    <i class="fa fa-edit"></i>
+                                    Editar
+                                </button>
+                            </a>
+                            <a href="">
+                                <button type="button" class="btn btn-outline-danger">
+                                    <i class="fa fa-ban"></i>
+                                    Borrar
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        
     </div>
     </div>    
 
@@ -56,10 +74,10 @@
 
 @section('js')
     <script>
-        $('#datatable').DataTable();     
-        
-        /*{
-        "language": {"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"}
-        }*/
+        $('#datatable').DataTable({
+        "language": {
+"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+}
+      });
     </script>
 @stop
