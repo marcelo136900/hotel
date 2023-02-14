@@ -22,3 +22,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('huesped','App\Http\Controllers\HuespedController');
+
+Route::resource('hospedaje','App\Http\Controllers\HospedajeController');
+
+Route::resource('habitacion','App\Http\Controllers\HabitacionController');

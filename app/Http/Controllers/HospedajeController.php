@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Habitacion;
 use App\Models\Hospedaje;
+use App\Models\Huesped;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class HospedajeController extends Controller
 {
@@ -14,7 +17,11 @@ class HospedajeController extends Controller
      */
     public function index()
     {
-        //
+        $hospedaje = Hospedaje::all();
+        $habitacion = Habitacion::all();
+        $huesped = Huesped::all();
+
+        return view('hospedaje.index', ["hospedaje" => $hospedaje, "habitacion" => $habitacion, "huesped" => $huesped]);
     }
 
     /**
@@ -35,7 +42,19 @@ class HospedajeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);
+        $hospedaje = new Hospedaje();
+
+        $hospedaje->fechainicio = $request->fechainicio;
+        $hospedaje->fechasalida = $request->fechasalida;
+        $hospedaje->idhabitacion = $request->idhabitacion;
+        $hospedaje->diashospedaje = $request->diashospedaje;
+        $hospedaje->idhuesped = $request->idhuesped;
+        $hospedaje->estado = "HOSPEDADO";
+
+        $hospedaje->save();
+
+        return Redirect::to('hospedaje');
     }
 
     /**

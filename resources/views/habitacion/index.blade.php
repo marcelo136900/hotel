@@ -3,22 +3,22 @@
 @section('title', 'Lista Huespeds')
 
 @section('content_header')
-    <h1>index huesped</h1>
+    <h1>Habitacion</h1>
 @stop
 
 @section('content')
     <div class="card">
 
         <div class="card-header">
-            Lista Huespedes
+            Lista Habitaciones
         </div>
 
         <div class="card-body">
             <div class="row">
-                <a href="huesped/create">
+                <a href="habitacion/create">
                     <button type="button" class="btn btn-outline-info">
                         <i class="fa fa-plus"></i>&nbsp;&nbsp;
-                        Nuevo Huesped
+                        Nueva Habitacion
                     </button>
                 </a>
             </div>
@@ -27,24 +27,20 @@
                 <table class="table table-bordered" id="datatable">
                     <thead>
                         <th>ID</th>
-                        <th>CI HUESPED</th>
-                        <th>NOMBRE COMPLETO</th>
-                        <th>ID CIUDAD</th>
-                        <th>TELEFONO</th>
-                        <th>PROFESION</th>
+                        <th>NRO HABITACION</th>
+                        <th>DISPONIBILIDAD</th>
+                        <th>ID TIPO</th>
                         <th>ACCIONES</th>
                     </thead>
                     <tbody>            
-                        @foreach($huesped as $value)            
+                        @foreach($habitacion as $value)            
                         <tr>            
                             <td>{{$value->id}}</td>
-                            <td>{{$value->cihuesped}}</td>
-                            <td>{{$value->nombrecompleto}}</td>
-                            <td>{{$value->idciudad}}</td>
-                            <td>{{$value->telefono}}</td>
-                            <td>{{$value->profesion}}</td>
+                            <td>{{$value->numhabitacion}}</td>
+                            <td>{{$value->diponibilidad}}</td>
+                            <td>{{$value->idtipo}}</td>
                             <td>
-                                <a href="{{route('huesped.edit',$value->id)}}">
+                                <a href="{{route('habitacion.edit',$value->id)}}">
                                     <button type="button" class="btn btn-outline-primary">
                                         <i class="fa fa-edit"></i>
                                         Editar

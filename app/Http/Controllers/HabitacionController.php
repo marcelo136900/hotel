@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Habitacion;
+use App\Models\TipoHabitacion;
 use Illuminate\Http\Request;
 
 class HabitacionController extends Controller
@@ -14,7 +15,10 @@ class HabitacionController extends Controller
      */
     public function index()
     {
-        //
+        $habitacion = Habitacion::all();
+        $tipohabitacion = TipoHabitacion::all();
+
+        return view('habitacion.index', ["habitacion" => $habitacion]);
     }
 
     /**
