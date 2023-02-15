@@ -78,7 +78,7 @@ class HuespedController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {        
         //dd($id);
         $huesped=Huesped::findOrFail($id);
         $ciudades=Ciudad::all();
@@ -94,6 +94,13 @@ class HuespedController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([            
+            'cihuesped'     =>'required',
+            'nombrecompleto'=>'required',
+            'idciudad'      =>'required',
+            'telefono'      =>'required',
+            'profesion'     =>'required'
+        ]);
         //dd($request->all());
         //dd($id);
         $huesped=Huesped::findOrFail($id);

@@ -15,7 +15,16 @@
                 <div class="card-header">
                     Nuevo Huesped
                 </div>
-                <div class="card-body">            
+                <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{$error}}</li>
+                                @endforeach
+                            </ul>                            
+                        </div>                        
+                    @endif
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">C.I.</label>
                         <input class="form-control" id="cihuesped" name="cihuesped" placeholder="Ingrese Cedula de Identidad">
