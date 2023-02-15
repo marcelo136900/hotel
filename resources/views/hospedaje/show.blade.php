@@ -21,13 +21,13 @@
                 <td>{{$value->idhuesped}}</td>
                 <td>{{$value->estado}}</td>
                 <td>
-                    <a href="{{route('huesped.edit',$value->id)}}">
+                    <a href="{{route('hospedaje.edit',$value->id)}}">
                         <button type="button" class="btn btn-warning">
                             <i class="fa fa-edit"></i>
                             Editar
                         </button>
                     </a>
-                    <a href="">
+                    <a href="{{ route('hospedaje.edit',$value->id) }}">
                         <button type="button" class="btn btn-danger">
                             Check-out
                         </button>

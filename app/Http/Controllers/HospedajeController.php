@@ -6,6 +6,7 @@ use App\Models\Habitacion;
 use App\Models\Hospedaje;
 use App\Models\Huesped;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class HospedajeController extends Controller
@@ -74,9 +75,16 @@ class HospedajeController extends Controller
      * @param  \App\Models\Hospedaje  $hospedaje
      * @return \Illuminate\Http\Response
      */
-    public function edit(Hospedaje $hospedaje)
+    public function edit( $id )
     {
-        //
+        $hospedaje = Hospedaje::findOrFail($id);
+        $huesped = Huesped::all();
+        $habitacion = Habitacion::all();
+        $hospedajehuesped = DB::table('huespeds')->select('id', 'nombrecompleto', 'cihuesped')->where('id', '=', $hospedaje->idhuesped)->get();
+        $hospedajehabitacion = DB::table('habitacions')->select('id', 'numhabitacion', 'diponibilidad')->where('id', '=', $hospedaje->idhabitacion)->get();
+
+        return view('hospedaje.edit', ["hospedaje" => $hospedaje, "huesped" => $huesped, "habitacion" => $habitacion, "hospedajehuesped" => $hospedajehuesped, "hospedajehabitacion" => $hospedajehabitacion]);
+
     }
 
     /**
@@ -86,9 +94,27 @@ class HospedajeController extends Controller
      * @param  \App\Models\Hospedaje  $hospedaje
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Hospedaje $hospedaje)
+    public function update(Request $request, $id)
     {
-        //
+        //dd($request);
+        $hospedaje = Hospedaje::findOrFail($id);
+
+        if (!$request->estado){
+            $hospedaje->fechainicio = $request->fechainicio;
+            $hospedaje->fechasalida = $request->fechasalida;
+            $hospedaje->idhabitacion = $request->idhabitacion;
+            $hospedaje->diashospedaje = $request->diashospedaje;
+            $hospedaje->idhuesped = $request->idhuesped;
+        }
+        else{
+
+            $hospedaje->estado = $request->estado;
+            
+        }
+
+        $hospedaje->save();
+
+        return Redirect::to('hospedaje');
     }
 
     /**
