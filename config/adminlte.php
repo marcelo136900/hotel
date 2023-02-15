@@ -321,12 +321,12 @@ return [
         [
             'text' => 'hospedaje',
             'route'=> 'hospedaje.index',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-fw fa-hotel',
         ],
         [
             'text' => 'habitacion',
             'route'=> 'habitacion.index',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-fw fa-bed',
         ],
         
         

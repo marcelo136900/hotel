@@ -29,8 +29,7 @@
                     </a>
                     <a href="">
                         <button type="button" class="btn btn-danger">
-                            <i class="fa fa-ban"></i>
-                            Borrar
+                            Check-out
                         </button>
                     </a>
                 </td>

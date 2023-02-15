@@ -21,14 +21,14 @@
                 <div class="col-6">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Fecha inicio</label>
-                        <input type="date" class="form-control" id="fechainicio" name="fechainicio">
+                        <input type="date" class="form-control" id="fechainicio" name="fechainicio" value="{{ date("Y-m-d") }}">
                     </div>
                 </div>
 
                 <div class="col-6">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Fecha salida</label>
-                        <input type="date" class="form-control" id="fechasalida" name="fechasalida">
+                        <input type="date" class="form-control" id="fechasalida" name="fechasalida" value="{{ date("Y-m-d",strtotime(date("Y-m-d")."+ 1 days")) }}">
                     </div>
                 </div>
             </div>
