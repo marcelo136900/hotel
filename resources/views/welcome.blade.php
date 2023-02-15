@@ -164,7 +164,7 @@
                   <rect width="100%" height="100%" fill="#777"/>
                   <image href="{{asset('img/piscina.jpg')}}" whidth="100%" height="100%" />
                 </svg>        
-                <h2>Restaurantes de carnes en su maxima expresion</h2>
+                <h2>Piscinas de lujo</h2>
                 <p>Disfrute del atractivo romántico de una experiencia al aire libre junto a la piscina con infusión mediterránea. Con cinco configuraciones distintivas del patio de la piscina, venga a darse un relajante chapuzón en refrescantes aguas azules.</p>                
               </div><!-- /.col-lg-4 -->
 
