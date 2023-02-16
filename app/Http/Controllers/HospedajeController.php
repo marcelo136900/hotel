@@ -128,13 +128,13 @@ class HospedajeController extends Controller
     public function update(Request $request, $id)
     {
 
-        $request->validate([
+        /*$request->validate([
             'fechainicio'   => 'required',
             'fechasalida'   => 'required',
             'idhabitacion'  => 'required',
             'diashospedaje' => 'required',
             'idhuesped'     => 'required',
-        ]);
+        ]);*/
         //dd($request);
         $hospedaje = Hospedaje::findOrFail($id);
         //dd($hospedaje);
@@ -153,6 +153,12 @@ class HospedajeController extends Controller
 
         $hospedaje->save();
         
+        //Actualizacion de la habitacion
+        $habitacion = DB::table('habitacions')
+                        ->where('id', '=', $request->idhabitacion)
+                        ->update(['diponibilidad' => 'LIBRE']);
+
+
         return Redirect::to('hospedaje');
     }
 

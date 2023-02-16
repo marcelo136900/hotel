@@ -20,8 +20,9 @@ class HuespedController extends Controller
         $huesped=Huesped::all();
         $huespedCiudad = DB::table('huespeds')
                             ->join('ciudads', 'ciudads.id', '=', 'huespeds.idciudad')
-                            ->select('huespeds.*', 'ciudads.*')
+                            ->select('huespeds.*', 'ciudads.nombreciudad')
                             ->get();
+                            //dd($huespedCiudad);
         //$ciudades=Ciudad::all();
         return view('huesped.index',["huesped"=>$huesped, "huespedCiudad" => $huespedCiudad]);
         //return view('huesped.edit',['huesped'=>$huesped,'ciudades'=>$ciudades]);

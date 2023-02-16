@@ -73,9 +73,11 @@ class HabitacionController extends Controller
      * @param  \App\Models\Habitacion  $habitacion
      * @return \Illuminate\Http\Response
      */
-    public function edit(Habitacion $habitacion)
+    public function edit($id)
     {
-        //
+        $tipohabitacion = TipoHabitacion::all();
+        $habitacion=Habitacion::findOrFail($id);
+        return view('habitacion.edit', ['habitacion' => $habitacion, 'tipohabitacion'=>$tipohabitacion]);
     }
 
     /**
@@ -85,9 +87,17 @@ class HabitacionController extends Controller
      * @param  \App\Models\Habitacion  $habitacion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Habitacion $habitacion)
+    public function update(Request $request, $id)
     {
-        //
+        $habitacion=Habitacion::findOrFail($id);
+
+        $habitacion->numhabitacion = $request->numhabitacion;
+
+        $habitacion->idtipo = $request->idtipo;
+
+        $habitacion->save();
+
+        return Redirect::to('habitacion');
     }
 
     /**

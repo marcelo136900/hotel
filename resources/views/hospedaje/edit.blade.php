@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Editar Huesped')
+@section('title', 'Editar Hospedaje')
 
 @section('content_header')
-    <h1>editar hospedaje</h1>
+    <h1>Editar Hospedaje</h1>
 @stop
 
 @section('content')  
@@ -101,6 +101,12 @@
                     <div class="mb-3">
 
                         <input type="hidden" name="estado" value="FINALIZADO">
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <input type="hidden" name="idhabitacion" value="{{$hospedaje->idhabitacion}}">
 
                     </div>
                 
