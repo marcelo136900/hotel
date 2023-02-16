@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Huesped;
 use App\Models\Ciudad;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class HuespedController extends Controller
@@ -17,8 +18,12 @@ class HuespedController extends Controller
     public function index()
     {
         $huesped=Huesped::all();
+        $huespedCiudad = DB::table('huespeds')
+                            ->join('ciudads', 'ciudads.id', '=', 'huespeds.idciudad')
+                            ->select('huespeds.*', 'ciudads.*')
+                            ->get();
         //$ciudades=Ciudad::all();
-        return view('huesped.index',["huesped"=>$huesped]);
+        return view('huesped.index',["huesped"=>$huesped, "huespedCiudad" => $huespedCiudad]);
         //return view('huesped.edit',['huesped'=>$huesped,'ciudades'=>$ciudades]);
     }
 

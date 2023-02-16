@@ -3,7 +3,7 @@
 @section('title', 'Lista Huespeds')
 
 @section('content_header')
-    <h1>index huesped</h1>
+    <h1>Huespedes</h1>
 @stop
 
 @section('content')
@@ -29,18 +29,18 @@
                         <th>ID</th>
                         <th>CI HUESPED</th>
                         <th>NOMBRE COMPLETO</th>
-                        <th>ID CIUDAD</th>
+                        <th>CIUDAD</th>
                         <th>TELEFONO</th>
                         <th>PROFESION</th>
                         <th>ACCIONES</th>
                     </thead>
                     <tbody>            
-                        @foreach($huesped as $value)            
+                        @foreach($huespedCiudad as $value)            
                         <tr>            
                             <td>{{$value->id}}</td>
                             <td>{{$value->cihuesped}}</td>
                             <td>{{$value->nombrecompleto}}</td>
-                            <td>{{$value->idciudad}}</td>
+                            <td>{{$value->nombreciudad}}</td>
                             <td>{{$value->telefono}}</td>
                             <td>{{$value->profesion}}</td>
                             <td>

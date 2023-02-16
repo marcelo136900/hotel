@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Habitacion;
 use App\Models\TipoHabitacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class HabitacionController extends Controller
 {
@@ -15,8 +17,10 @@ class HabitacionController extends Controller
      */
     public function index()
     {
-        $habitacion = Habitacion::all();
-        $tipohabitacion = TipoHabitacion::all();
+        $habitacion = DB::table('habitacions')
+                        ->join('tipo_habitacions', 'tipo_habitacions.id', '=', 'habitacions.idtipo')
+                        ->select('habitacions.*', 'tipo_habitacions.*')
+                        ->get();
 
         return view('habitacion.index', ["habitacion" => $habitacion]);
     }
@@ -28,7 +32,9 @@ class HabitacionController extends Controller
      */
     public function create()
     {
-        //
+        $tipohabitacion = TipoHabitacion::all();
+
+        return view('habitacion.create', ["tipohabitacion" => $tipohabitacion]);
     }
 
     /**
@@ -39,7 +45,15 @@ class HabitacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $habitacion = new Habitacion();
+
+        $habitacion->numhabitacion = $request->numhabitacion;
+        $habitacion->diponibilidad = 'LIBRE';
+        $habitacion->idtipo = $request->idtipo;
+
+        $habitacion->save();
+
+        return Redirect::to('habitacion');
     }
 
     /**

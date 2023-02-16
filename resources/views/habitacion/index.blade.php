@@ -29,7 +29,8 @@
                         <th>ID</th>
                         <th>NRO HABITACION</th>
                         <th>DISPONIBILIDAD</th>
-                        <th>ID TIPO</th>
+                        <th>TIPO</th>
+                        <th>PRECIO</th>
                         <th>ACCIONES</th>
                     </thead>
                     <tbody>            
@@ -38,7 +39,8 @@
                             <td>{{$value->id}}</td>
                             <td>{{$value->numhabitacion}}</td>
                             <td>{{$value->diponibilidad}}</td>
-                            <td>{{$value->idtipo}}</td>
+                            <td>{{$value->tipo}}</td>
+                            <td>{{$value->precio}}</td>
                             <td>
                                 <a href="{{route('habitacion.edit',$value->id)}}">
                                     <button type="button" class="btn btn-outline-primary">

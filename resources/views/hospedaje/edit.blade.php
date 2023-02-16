@@ -20,7 +20,7 @@
                         <label for="exampleFormControlInput1" class="form-label">Huesped</label>
 
                         <select name="idhuesped" class="form-control" id="select22">
-                            <option value="{{ $hospedaje->idhuesped }}">{{ $hospedajehuesped[0]->nombrecompleto }} - {{ $hospedajehuesped[0]->cihuesped }}</option>
+                            <option value="{{ $hospedajeHuHaId[0]->idhuesped }}">{{ $hospedajeHuHaId[0]->nombrecompleto }} - {{ $hospedajeHuHaId[0]->cihuesped }}</option>
 
                             @foreach ($huesped as $value)
                                 <option value="{{ $value->id }}">{{ $value->nombrecompleto }} - {{ $value->cihuesped }}</option>
@@ -51,7 +51,7 @@
                                 <label for="idhabitacion" class="form-label">Habitacion</label>
                 
                                 <select name="idhabitacion" class="form-control">
-                                    <option value="{{ $hospedaje->idhabitacion }}">{{ $hospedajehabitacion[0]->numhabitacion }}</option>
+                                    <option value="{{ $hospedajeHuHaId[0]->idhabitacion }}">{{ $hospedajeHuHaId[0]->numhabitacion }}</option>
                 
                                     @foreach ($habitacion as $value)
                                         <option value="{{ $value->id }}">{{ $value->numhabitacion }}</option>

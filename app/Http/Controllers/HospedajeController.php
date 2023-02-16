@@ -19,10 +19,19 @@ class HospedajeController extends Controller
     public function index()
     {
         $hospedaje = Hospedaje::all();
-        $habitacion = Habitacion::all();
+        $habitacion = DB::table('habitacions')
+                        ->select('*')
+                        ->where('habitacions.diponibilidad', '=', 'LIBRE')
+                        ->get();
         $huesped = Huesped::all();
 
-        return view('hospedaje.index', ["hospedaje" => $hospedaje, "habitacion" => $habitacion, "huesped" => $huesped]);
+        $hospedajeHuHa = Hospedaje::join('huespeds', 'hospedajes.idhuesped', '=', 'huespeds.id')
+                            ->join('habitacions', 'hospedajes.idhabitacion', '=', 'habitacions.id')
+                            ->select('hospedajes.*', 'huespeds.nombrecompleto', 'habitacions.numhabitacion')
+                            ->where('hospedajes.estado', '=', 'HOSPEDADO')
+                            ->get();
+//dd($hospedajeHuHa);
+        return view('hospedaje.index', ["hospedaje" => $hospedaje, "habitacion" => $habitacion, "huesped" => $huesped, 'hospedajeHuHa' => $hospedajeHuHa]);
     }
 
     /**
@@ -44,6 +53,7 @@ class HospedajeController extends Controller
     public function store(Request $request)
     {
         //dd($request);
+        //Guardado de hospedaje
         $hospedaje = new Hospedaje();
 
         $hospedaje->fechainicio = $request->fechainicio;
@@ -54,6 +64,11 @@ class HospedajeController extends Controller
         $hospedaje->estado = "HOSPEDADO";
 
         $hospedaje->save();
+
+        //Actualizacion de la habitacion
+        $habitacion = DB::table('habitacions')
+                        ->where('id', '=', $request->idhabitacion)
+                        ->update(['diponibilidad' => 'OCUPADO']);
 
         return Redirect::to('hospedaje');
     }
@@ -83,7 +98,14 @@ class HospedajeController extends Controller
         $hospedajehuesped = DB::table('huespeds')->select('id', 'nombrecompleto', 'cihuesped')->where('id', '=', $hospedaje->idhuesped)->get();
         $hospedajehabitacion = DB::table('habitacions')->select('id', 'numhabitacion', 'diponibilidad')->where('id', '=', $hospedaje->idhabitacion)->get();
 
-        return view('hospedaje.edit', ["hospedaje" => $hospedaje, "huesped" => $huesped, "habitacion" => $habitacion, "hospedajehuesped" => $hospedajehuesped, "hospedajehabitacion" => $hospedajehabitacion]);
+        $hospedajeHuHaId = DB::table('hospedajes')
+                                ->join('huespeds', 'huespeds.id', '=', 'hospedajes.idhuesped')
+                                ->join('habitacions', 'habitacions.id', '=', 'hospedajes.idhabitacion')
+                                ->select('hospedajes.*', 'huespeds.*', 'habitacions.*')
+                                ->where('hospedajes.id', '=', $id)
+                                ->get();
+        //dd($hospedajeHuHaId);
+        return view('hospedaje.edit', ["hospedaje" => $hospedaje, "huesped" => $huesped, "habitacion" => $habitacion, "hospedajehuesped" => $hospedajehuesped, "hospedajehabitacion" => $hospedajehabitacion, "hospedajeHuHaId" => $hospedajeHuHaId]);
 
     }
 
@@ -98,7 +120,7 @@ class HospedajeController extends Controller
     {
         //dd($request);
         $hospedaje = Hospedaje::findOrFail($id);
-
+        //dd($hospedaje);
         if (!$request->estado){
             $hospedaje->fechainicio = $request->fechainicio;
             $hospedaje->fechasalida = $request->fechasalida;
@@ -113,7 +135,7 @@ class HospedajeController extends Controller
         }
 
         $hospedaje->save();
-
+        
         return Redirect::to('hospedaje');
     }
 
