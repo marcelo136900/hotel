@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TipoHabitacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class TipoHabitacionController extends Controller
 {
@@ -14,7 +15,9 @@ class TipoHabitacionController extends Controller
      */
     public function index()
     {
-        //
+        $tipoHabitacion = TipoHabitacion::all();
+
+        return view('tipohabitacion.index', ["tipoHabitacion" => $tipoHabitacion]);
     }
 
     /**
@@ -35,7 +38,19 @@ class TipoHabitacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'tipo'   => 'required',
+            'precio' => 'required'
+        ]);
+
+        $tipoHabitacion = new TipoHabitacion();
+
+        $tipoHabitacion->tipo = $request->tipo;
+        $tipoHabitacion->precio = $request->precio;
+
+        $tipoHabitacion->save();
+
+        return Redirect::to('tipohabitacion');
     }
 
     /**
@@ -55,9 +70,11 @@ class TipoHabitacionController extends Controller
      * @param  \App\Models\TipoHabitacion  $tipoHabitacion
      * @return \Illuminate\Http\Response
      */
-    public function edit(TipoHabitacion $tipoHabitacion)
+    public function edit($id)
     {
-        //
+        $tipoHabitacion = TipoHabitacion::findOrFail($id);
+
+        return view('tipohabitacion.edit', ["tipoHabitacion" => $tipoHabitacion]);
     }
 
     /**
@@ -67,9 +84,21 @@ class TipoHabitacionController extends Controller
      * @param  \App\Models\TipoHabitacion  $tipoHabitacion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TipoHabitacion $tipoHabitacion)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'tipo'   => 'required',
+            'precio' => 'required'
+        ]);
+
+        $tipoHabitacion = TipoHabitacion::findOrFail($id);
+
+        $tipoHabitacion->tipo = $request->tipo;
+        $tipoHabitacion->precio = $request->precio;
+
+        $tipoHabitacion->save();
+
+        return Redirect::to('tipohabitacion');
     }
 
     /**

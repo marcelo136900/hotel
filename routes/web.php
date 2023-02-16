@@ -20,6 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
+
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::resource('huesped','App\Http\Controllers\HuespedController');
@@ -28,5 +29,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('habitacion','App\Http\Controllers\HabitacionController');
 
+    Route::resource('ciudad','App\Http\Controllers\CiudadController');
+
+    Route::resource('tipohabitacion','App\Http\Controllers\TipoHabitacionController');
+
 });
+
 

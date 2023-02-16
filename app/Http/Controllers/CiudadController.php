@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ciudad;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class CiudadController extends Controller
 {
@@ -14,7 +15,9 @@ class CiudadController extends Controller
      */
     public function index()
     {
-        //
+        $ciudad = Ciudad::all();
+
+        return view('ciudad.index', ["ciudad" => $ciudad]);
     }
 
     /**
@@ -24,7 +27,7 @@ class CiudadController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -35,7 +38,17 @@ class CiudadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombreciudad' => 'required|max:100'
+        ]);
+
+        $ciudad = new Ciudad();
+
+        $ciudad->nombreciudad = $request->nombreciudad;
+
+        $ciudad->save();
+
+        return Redirect::to('ciudad');
     }
 
     /**
@@ -55,9 +68,11 @@ class CiudadController extends Controller
      * @param  \App\Models\Ciudad  $ciudad
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ciudad $ciudad)
+    public function edit($id)
     {
-        //
+        $ciudad = Ciudad::findOrFail($id);
+
+        return view('ciudad.edit', ["ciudad" => $ciudad]);
     }
 
     /**
@@ -67,9 +82,19 @@ class CiudadController extends Controller
      * @param  \App\Models\Ciudad  $ciudad
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ciudad $ciudad)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nombreciudad' => 'required|max:100'
+        ]);
+        
+        $ciudad = Ciudad::findOrFail($id);
+
+        $ciudad->nombreciudad = $request->nombreciudad;
+
+        $ciudad->save();
+
+        return Redirect::to('ciudad');
     }
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Habitacion;
 use App\Models\Hospedaje;
 use App\Models\Huesped;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -52,6 +53,14 @@ class HospedajeController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'fechainicio'   => 'required',
+            'fechasalida'   => 'required',
+            'idhabitacion'  => 'required',
+            'diashospedaje' => 'required',
+            'idhuesped'     => 'required',
+        ]);
         //dd($request);
         //Guardado de hospedaje
         $hospedaje = new Hospedaje();
@@ -118,6 +127,14 @@ class HospedajeController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $request->validate([
+            'fechainicio'   => 'required',
+            'fechasalida'   => 'required',
+            'idhabitacion'  => 'required',
+            'diashospedaje' => 'required',
+            'idhuesped'     => 'required',
+        ]);
         //dd($request);
         $hospedaje = Hospedaje::findOrFail($id);
         //dd($hospedaje);

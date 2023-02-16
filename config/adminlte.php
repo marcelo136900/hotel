@@ -328,6 +328,16 @@ return [
             'route'=> 'habitacion.index',
             'icon' => 'fas fa-fw fa-bed',
         ],
+        [
+            'text' => 'ciudad',
+            'route'=> 'ciudad.index',
+            'icon' => 'fas fa-fw fa-globe',
+        ],
+        [
+            'text' => 'Tipo Habitacion',
+            'route'=> 'tipohabitacion.index',
+            'icon' => 'fas fa-fw fa-bed',
+        ],
         
         
         
