@@ -24,6 +24,6 @@
 
 @section('js')
     <script>
-        //$('#select2').select2();
+        $('#datatable').DataTable();
     </script>
 @stop

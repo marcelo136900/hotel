@@ -312,24 +312,29 @@ return [
             'can'  => 'manage-blog',
         ],
         
+        [
+            'text' => 'Inicio',
+            'route'=> 'home',
+            'icon' => 'fas fa-fw fa-home',
+        ],
         ['header' => 'MENU'],
         [
-            'text' => 'huesped',
+            'text' => 'Huesped',
             'route'=> 'huesped.index',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'hospedaje',
+            'text' => 'Hospedaje',
             'route'=> 'hospedaje.index',
             'icon' => 'fas fa-fw fa-hotel',
         ],
         [
-            'text' => 'habitacion',
+            'text' => 'Habitacion',
             'route'=> 'habitacion.index',
             'icon' => 'fas fa-fw fa-bed',
         ],
         [
-            'text' => 'ciudad',
+            'text' => 'Ciudad',
             'route'=> 'ciudad.index',
             'icon' => 'fas fa-fw fa-globe',
         ],
@@ -414,7 +419,7 @@ return [
             ],
         ],
         'Chartjs' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

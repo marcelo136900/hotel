@@ -19,7 +19,7 @@ class HabitacionController extends Controller
     {
         $habitacion = DB::table('habitacions')
                         ->join('tipo_habitacions', 'tipo_habitacions.id', '=', 'habitacions.idtipo')
-                        ->select('habitacions.*', 'tipo_habitacions.*')
+                        ->select('habitacions.*', 'tipo_habitacions.tipo', 'tipo_habitacions.precio')
                         ->get();
 
         return view('habitacion.index', ["habitacion" => $habitacion]);

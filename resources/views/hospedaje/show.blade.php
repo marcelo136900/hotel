@@ -1,4 +1,4 @@
-<div class="table table-responsive">
+<div class="table table-bordered table-striped">
     <table class="table table-bordered" id="datatable">
         <thead>
             <th>ID</th>

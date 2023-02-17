@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Agregar Huesped')
+@section('title', 'Agregar Habitacion')
 
 @section('content_header')
     <h1>Habitacion</h1>
